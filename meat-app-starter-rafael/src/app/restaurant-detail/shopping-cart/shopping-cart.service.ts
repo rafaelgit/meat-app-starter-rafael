@@ -23,11 +23,11 @@ export class ShoppingCartService {
         }
     }
 
-    private increaseQty(cart: CartItem){
+    increaseQty(cart: CartItem){
         cart.quantity = cart.quantity + 1
     }
 
-    private removeItem(menu: MenuItem){
+    removeItem(menu: MenuItem){
         let foundCart = this.carts.find((cart) => cart.menuItem.id === menu.id)
         
         if (foundCart){
@@ -39,7 +39,7 @@ export class ShoppingCartService {
         }
     }
 
-    private decreaseQty(cart: CartItem){
+    decreaseQty(cart: CartItem){
         cart.quantity = cart.quantity -1
     }
 
