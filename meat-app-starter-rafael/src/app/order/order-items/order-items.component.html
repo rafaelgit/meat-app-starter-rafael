@@ -1,0 +1,26 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">Quantidade</th>
+            <th>Item</th>
+            <th>Descrição</th>
+            <th class="text-right">Subtotal</th>
+            <th class="text-right"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cart of carts">
+            <td class="text-center">
+                <a class="btn btn-sm" (click)='emitDecreaseQty(cart.menuItem)'><i class="fa fa-minus"></i></a>
+                {{cart.quantity}}
+                <a class="btn btn-sm" (click)='emitIncreaseQty(cart.menuItem)'><i class="fa fa-plus"></i></a>
+            </td>
+            <td>{{cart.menuItem.name}}</td>
+            <td>{{cart.menuItem.description}}</td>
+            <td class="text-right">{{cart.value() | currency: 'BRL'}}</td>
+            <td class="text-right">
+            <a class="btn btn-sm danger" (click)='emitRemove(cart)'><i class="fa fa-remove"></i></a>
+            </td>
+        </tr>
+    </tbody>
+</table>

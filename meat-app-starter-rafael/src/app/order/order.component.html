@@ -1,0 +1,104 @@
+<!--INICIO DO CONTEUDO-->
+<section class="content-header">
+    </section>
+
+    <section class="content">
+      <section class="invoice">
+
+            {{form.valid}}
+            {{form.value | json}}
+
+            <form #form='ngForm' novalidate>
+              <div class="row">
+                <div class="col-xs-12">
+                  <h2 class="page-header">
+                    <i class="fa fa-shopping-cart"></i> Finalize o seu pedido
+                  </h2>
+                </div>
+              </div>                
+
+              <div class="row invoice-info">
+                <div class="col-xs-12">
+                  <p class="lead">Endereço de Entrega:</p>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                <app-input label="Endereço" errorMessage="Campo obrigatório e com mínimo de 5 caracteres">
+                  <input class="form-control" name="address" ngModel minlength="5" autocomplete="off" required/>
+                </app-input>
+                </div>
+                <div class="col-sm-2 col-xs-6">
+                  <app-input label="Número">
+                    <input class="form-control" name="number" ngModel pattern="^[0-9]*$" required/>
+                  </app-input>
+                </div>
+                <div class="col-sm-4 col-xs-6">
+                  <app-input label="Complemento">
+                    <input class="form-control" name="complement" ngModel required/>
+                  </app-input>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+              <!-- Table row -->
+              <div class="row">
+                <div class="col-xs-12">
+                  <p class="lead">Itens do Pedido:</p>
+                </div>
+                <div class="col-xs-12 table-responsive">
+                  <app-order-items [carts]='cartItems()'
+                                   (increaseQty)="increaseQty($event)"
+                                   (decreaseQty)="decreaseQty($event)"
+                                   (remove)="remove($event)">
+                  </app-order-items>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+              <div class="row">
+                <!-- accepted payments column -->
+                <div class="col-sm-6 col-xs-12">
+                  <p class="lead">Formas de Pagamento:</p>
+
+                    <div class="form-group">
+                      <app-radio [options]="paymentOptions" name="paymentOption" ngModel></app-radio>
+                    </div>
+
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6 col-xs-12">
+                  <p class="lead">Frete e Total:</p>
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tbody><tr>
+                        <th style="width:50%">Itens:</th>
+                        <td class="text-right">{{cartItems().length}}</td>
+                      </tr>
+                      <tr>
+                        <th>Frete:</th>
+                        <td class="text-right">{{cartItems().length * 5 | currency: 'BRL'}}</td>
+                      </tr>
+                      <tr>
+                        <th>Total:</th>
+                        <td class="text-right">{{total() | currency: 'BRL'}}</td>
+                      </tr>
+                    </tbody></table>
+                  </div>
+                </div>
+                <!-- /.col -->
+              </div>
+
+            </form>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <button class="btn btn-success pull-right" [disabled]="!form.valid"><i class="fa fa-credit-card"></i> Concluir Pedido
+                </button>
+              </div>
+            </div>
+
+        </section>
+    </section>
+    <!-- FIM DO CONTEUDO-->
