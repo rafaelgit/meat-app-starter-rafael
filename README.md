@@ -1,6 +1,6 @@
 # meat-app-starter-rafael
 
-## Who to start?
+## How to start?
 
 ```ssh
 cd meat-app-starter-rafael
