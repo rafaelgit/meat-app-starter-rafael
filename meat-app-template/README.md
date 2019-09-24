@@ -1,1 +1,1 @@
-## Template usado para a aplicação Meat - Angular
+## Used template for meat-app-starter-rafael application
