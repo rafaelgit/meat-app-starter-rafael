@@ -3,6 +3,8 @@ import { RadioOption } from '../shared/radio/radio-option.model';
 import { CartItem } from '../restaurant-detail/shopping-cart/cart-item.model';
 import { OrderService } from './order.service';
 import { MenuItem } from '../restaurant-detail/menu-item/menu-item.model';
+import { Order, OrderItem } from './order.model';
+import { ErrorHandler } from '../app.error-handler';
 
 @Component({
   selector: 'app-order',
@@ -39,6 +41,18 @@ export class OrderComponent implements OnInit {
 
   total(): number{
     return this.orderService.total()
+  }
+
+  checkOrder(order: Order){
+    order.orderItem = this.cartItems()
+      .map((item: CartItem) => new OrderItem(item.quantity, item.menuItem.id)) 
+
+    this.orderService.checkOrder(order).subscribe(
+      (data) => {
+        console.log(data)
+        this.orderService.clear()
+      }, ErrorHandler.handleError
+    )
   }
 
 }
