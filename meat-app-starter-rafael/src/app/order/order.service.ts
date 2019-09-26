@@ -45,12 +45,8 @@ export class OrderService {
       })
     };
 
-    try{
-      return this.http.post<string>(
-        MEAT_API + '/orders', JSON.stringify(order), httpOptions)
-    }catch(e){
-      console.log("deu merda")
-    }
+    return this.http.post<string>(
+      MEAT_API + '/orders', JSON.stringify(order), httpOptions)
   }
 
 }

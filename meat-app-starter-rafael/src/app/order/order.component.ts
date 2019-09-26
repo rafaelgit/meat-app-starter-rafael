@@ -5,6 +5,7 @@ import { OrderService } from './order.service';
 import { MenuItem } from '../restaurant-detail/menu-item/menu-item.model';
 import { Order, OrderItem } from './order.model';
 import { ErrorHandler } from '../app.error-handler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -19,7 +20,7 @@ export class OrderComponent implements OnInit {
     {label: 'Cartão Refeição', value: 'REF'}
   ]
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService, private router: Router) {}
 
   ngOnInit() { }
 
@@ -29,6 +30,7 @@ export class OrderComponent implements OnInit {
 
   increaseQty(menu: MenuItem){
     this.orderService.increaseQty(menu)
+    this.router.navigate(['order/summary'])
   }
 
   decreaseQty(menu: MenuItem){
@@ -49,7 +51,7 @@ export class OrderComponent implements OnInit {
 
     this.orderService.checkOrder(order).subscribe(
       (data) => {
-        console.log(data)
+        this.router.navigate(['summary'])
         this.orderService.clear()
       }, ErrorHandler.handleError
     )

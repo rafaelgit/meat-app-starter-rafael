@@ -21,7 +21,9 @@ import { OrderComponent } from './order/order.component';
 import {FormsModule} from "@angular/forms";
 import { InputComponent } from './shared/input/input.component';
 import { RadioComponent } from './shared/radio/radio.component';
-import { OrderItemsComponent } from './order/order-items/order-items.component';  
+import { OrderItemsComponent } from './order/order-items/order-items.component';
+import { OrderSummaryComponent } from './order/order-summary/order-summary.component';
+import { RatingComponent } from './shared/rating/rating.component';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -41,7 +43,9 @@ registerLocaleData(localePt);
     OrderComponent,
     InputComponent,
     RadioComponent,
-    OrderItemsComponent
+    OrderItemsComponent,
+    OrderSummaryComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,
