@@ -1,18 +1,18 @@
 import { Component, OnInit, Input, ContentChild, AfterContentInit } from '@angular/core';
-import {NgModel, NgControl} from '@angular/forms'
+import {NgModel, NgControl, FormControlName} from '@angular/forms'
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html'
 })
 export class InputComponent implements OnInit, AfterContentInit {
-
+  
   @Input() label: string
   @Input() errorMessage: string
 
-  input: NgModel
+  input: FormControlName
 
-  @ContentChild(NgModel, {static: false}) control: NgModel
+  @ContentChild(FormControlName, {static: false}) control: FormControlName
 
   constructor() { }
 
@@ -22,7 +22,7 @@ export class InputComponent implements OnInit, AfterContentInit {
     this.input = this.control
 
     if(this.input === undefined){
-      throw new Error('Esse componente precisa ser usado com diretiva ngModel')
+      throw new Error('Esse componente precisa ser usado com diretiva formControlName')
     }
   }
 
@@ -30,7 +30,7 @@ export class InputComponent implements OnInit, AfterContentInit {
     return this.input.valid && (this.input.dirty || this.input.touched)
   }
 
-  hasError(): boolean{
+  deuErroCaraio(): boolean{
     return !this.input.valid && (this.input.dirty || this.input.touched)
   }
 

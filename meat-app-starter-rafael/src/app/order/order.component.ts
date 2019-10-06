@@ -6,6 +6,7 @@ import { MenuItem } from '../restaurant-detail/menu-item/menu-item.model';
 import { Order, OrderItem } from './order.model';
 import { ErrorHandler } from '../app.error-handler';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-order',
@@ -14,16 +15,50 @@ import { Router } from '@angular/router';
 @Injectable()
 export class OrderComponent implements OnInit {
 
+  // const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  userForm: FormGroup
+
   paymentOptions: RadioOption[] = [
     {label: 'Dinheiro', value: 'MON'},
-    {label: 'Cartão de Débito', value: 'DEB', defaultChecked: true},
+    {label: 'Cartão de Débito', value: 'DEB'},
     {label: 'Cartão Refeição', value: 'REF'}
   ]
 
-  constructor(private orderService: OrderService, private router: Router) {}
+  constructor(private orderService: OrderService, private router: Router, private fb: FormBuilder) {}
+  
+  testaValidacao(): boolean {
+    return false
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.userForm = this.fb.group({
+      nome: this.fb.control('', [Validators.required]),
+      email: this.fb.control('', [Validators.required]),
+      emailConfirmation: this.fb.control('', [Validators.required]),
+      address: this.fb.group({
+        address: this.fb.control('', [Validators.required, Validators.minLength(5)]),
+        number: this.fb.control('', [Validators.required]),
+        complement: this.fb.control('', [Validators.required])
+      }),
+      paymentOption: this.fb.control('', [Validators.required]), 
+    }, {validators: [OrderComponent.validarEmail, OrderComponent.validarEmail]})
+  }
 
+static validarEmail(group: AbstractControl): {[key: string]: boolean}{
+    const email = group.get("email")
+    const emailConfirmation = group.get("emailConfirmation")
+
+    if (!email || !emailConfirmation){
+      return undefined
+    }
+
+    if (email.value !== emailConfirmation.value){
+      return {emailsNotMatch: true}
+    }
+
+    return undefined
+  }
+  
   cartItems(): CartItem[]{
     return this.orderService.cartItems()
   }

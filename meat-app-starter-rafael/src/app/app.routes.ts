@@ -10,7 +10,7 @@ import { OrderSummaryComponent } from './order/order-summary/order-summary.compo
 
 export const ROUTES: Routes = [
     {path: '', component: HomeComponent},
-    {path: 'about', component: AboutComponent},
+    {path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule)},
     {path: 'restaurants', component: RestaurantsComponent},
     {path: 'restaurants/:id', component: RestaurantDetailComponent,
         children:[

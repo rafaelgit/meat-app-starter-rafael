@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, AfterViewInit } from '@angular/core';
 import { RadioOption } from './radio-option.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -13,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class RadioComponent implements OnInit, ControlValueAccessor {
+export class RadioComponent implements OnInit {
 
   @Input() options: RadioOption[]
   value: any

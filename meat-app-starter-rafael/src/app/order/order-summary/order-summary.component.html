@@ -8,9 +8,11 @@
     <p>Seu pedido foi recebido pelo restaurante. Prepare a mesa que a comida está chegando!</p>
     <p><b>Avalie</b> sua experiência:</p>
     <p>
-        <app-rating (rated)='rated = true'></app-rating>
+        <app-rating 
+            (rated)='isRated($event)'
+            ></app-rating>
     </p>
-    <p *ngIf='rated'> Obrigado por sua avaliação de X estrelas!</p> 
+    <p *ngIf='rated'> Obrigado por sua avaliação de {{rated}} estrelas!</p> 
     </div>
 
 </section>

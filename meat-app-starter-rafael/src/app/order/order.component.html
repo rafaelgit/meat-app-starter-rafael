@@ -5,10 +5,10 @@
     <section class="content">
       <section class="invoice">
 
-            {{form.valid}}
-            {{form.value | json}}
+            {{userForm.valid}}
+            {{userForm.value | json}}
 
-            <form #form='ngForm' novalidate>
+            <form [formGroup]="userForm" novalidate>
               <div class="row">
                 <div class="col-xs-12">
                   <h2 class="page-header">
@@ -16,29 +16,54 @@
                   </h2>
                 </div>
               </div>                
-
-              <div class="row invoice-info">
+              <div class="row">
                 <div class="col-xs-12">
-                  <p class="lead">Endereço de Entrega:</p>
+                  <p class="lead">Dados Pessoais</p>
                 </div>
-                <div class="col-sm-6 col-xs-12">
-                <app-input label="Endereço" errorMessage="Campo obrigatório e com mínimo de 5 caracteres">
-                  <input class="form-control" name="address" ngModel minlength="5" autocomplete="off" required/>
-                </app-input>
+                <div class="col-sm-12 col-xs-8">
+                  <span class="help-block pull-right has-error-block" *ngIf="userForm.hasError('emailsNotMatch')"><i class="fa fa-remove"></i>E-mails não conferem</span>
                 </div>
-                <div class="col-sm-2 col-xs-6">
-                  <app-input label="Número">
-                    <input class="form-control" name="number" ngModel pattern="^[0-9]*$" required/>
+                <div class="col-sm-6 col-xs-8">
+                  <app-input label="nome">
+                    <input class="form-control" name="nome" autocomplete="off" formControlName="nome"/>
                   </app-input>
                 </div>
-                <div class="col-sm-4 col-xs-6">
-                  <app-input label="Complemento">
-                    <input class="form-control" name="complement" ngModel required/>
+                <div class="col-sm-3 col-xs-8">
+                  <app-input label="email">
+                    <input class="form-control" name="email" autocomplete="off" formControlName="email"/>
                   </app-input>
                 </div>
-                <!-- /.col -->
+                <div class="col-sm-3 col-xs-2">
+                  <app-input label="emailConfirmation">
+                    <input class="form-control" name="emailConfirmation" autocomplete="off" formControlName="emailConfirmation"/>
+                  </app-input>
+                </div>
               </div>
-              <!-- /.row -->
+
+              <!-- <form [formGroup]="a" novalidate> -->
+                <div class="row" formGroupName="address">
+                  <div class="col-xs-12">
+                    <p class="lead">Endereço de Entrega:</p>
+                  </div>
+                  <div class="col-sm-6 col-xs-12">
+                  <app-input label="Endereço" errorMessage="Campo obrigatório e com mínimo de 5 caracteres">
+                    <input class="form-control" name="address" autocomplete="off" formControlName="address"/>
+                  </app-input>
+                  </div>
+                  <div class="col-sm-2 col-xs-6">
+                    <app-input label="Número">
+                      <input class="form-control" name="number" pattern="^[0-9]*$" formControlName="number"/>
+                    </app-input>
+                  </div>
+                  <div class="col-sm-4 col-xs-6">
+                    <app-input label="Complemento">
+                      <input class="form-control" name="complement" formControlName="complement"/>
+                    </app-input>
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              <!-- </form> -->
 
               <!-- Table row -->
               <div class="row">
@@ -62,7 +87,7 @@
                   <p class="lead">Formas de Pagamento:</p>
 
                     <div class="form-group">
-                      <app-radio [options]="paymentOptions" name="paymentOption" ngModel></app-radio>
+                      <app-radio [options]="paymentOptions" name="paymentOption" formControlName="paymentOption"></app-radio>
                     </div>
 
                 </div>
@@ -94,9 +119,9 @@
 
             <div class="row">
               <div class="col-xs-12">
-                <button (click)="checkOrder(form.value)"
+                <button (click)="checkOrder(userForm.value)"
                   class="btn btn-success pull-right" 
-                  [disabled]="!form.valid">
+                  [disabled]="!userForm.valid">
                     <i class="fa fa-credit-card"></i> Concluir Pedido
                 </button>
               </div>
