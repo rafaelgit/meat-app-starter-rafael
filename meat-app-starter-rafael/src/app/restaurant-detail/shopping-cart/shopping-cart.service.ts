@@ -1,6 +1,7 @@
 import { CartItem } from './cart-item.model'
 import { MenuItem } from '../menu-item/menu-item.model'
 import { Injectable } from '@angular/core'
+import { NotificationService } from 'src/app/messages/snackbar/notification.service'
 
 @Injectable({
     providedIn: 'root'
@@ -8,6 +9,8 @@ import { Injectable } from '@angular/core'
 export class ShoppingCartService {
 
     carts: CartItem[] = []
+
+    constructor(private notificationService: NotificationService){}
 
     clear() {
         this.carts = []
@@ -21,6 +24,8 @@ export class ShoppingCartService {
         }else{
             this.carts.push(new CartItem(item))
         }
+
+        this.notificationService.notify(`${item.name} adicionado com sucesso!`)
     }
 
     increaseQty(cart: CartItem){

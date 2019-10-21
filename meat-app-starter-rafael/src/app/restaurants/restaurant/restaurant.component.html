@@ -1,5 +1,5 @@
 <a [routerLink]="['/restaurants', restaurantInput.id]">
-  <div class="place-info-box">
+  <div class="place-info-box" [@fadeCard]='fadeTrigger'>
     <span class="place-info-box-icon"><img [src]="restaurantInput.imagePath" /></span>
 
     <div class="place-info-box-content">

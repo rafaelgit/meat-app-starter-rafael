@@ -7,11 +7,11 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-        <div class="text-center" *ngIf=!carts.length> Seu carrinho de compras está vazio </div>
+        <div class="text-center" *ngIf=!carts.length  [@fadeItem]='fadeItemTrigger'> Seu carrinho de compras está vazio </div>
         <div class="table-responsive">
             <table class="table">
-                <tbody *ngIf=carts.length>
-                    <tr *ngFor="let cart of carts">
+                <tbody *ngIf=carts.length  [@fadeItem]='fadeItemTrigger'>
+                    <tr *ngFor="let cart of carts" [@fadeItem]='fadeItemTrigger'>
                         <th>({{cart.quantity}}x) {{cart.menuItem.name}}</th>
                         <td class="text-right">{{cart.value() | currency: 'BRL'}}</td>
                         <td class="text-righ">

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ContentChild, AfterContentInit } from '@angular/core';
-import {NgModel, NgControl, FormControlName} from '@angular/forms'
+import { FormControlName } from '@angular/forms'
 
 @Component({
   selector: 'app-input',
