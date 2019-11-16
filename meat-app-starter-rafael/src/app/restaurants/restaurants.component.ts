@@ -5,7 +5,6 @@ import { ErrorHandler } from '../app.error-handler';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { switchMap, tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-restaurants',

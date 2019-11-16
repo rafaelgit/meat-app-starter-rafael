@@ -21,7 +21,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SnackbarComponent } from './messages/snackbar/snackbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common'
+import { LoginComponent } from './security/login/login.component';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -39,16 +39,17 @@ registerLocaleData(localePt);
     ReviewComponent,
     OrderSummaryComponent,
     SnackbarComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}),
+    RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
     SharedModule.forRoot()
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: LOCALE_ID, useValue: 'pt-Br'}],
+  providers: [{provide: LOCALE_ID, useValue: 'pt-Br'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
