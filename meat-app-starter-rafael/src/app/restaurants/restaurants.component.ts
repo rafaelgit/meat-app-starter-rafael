@@ -32,6 +32,7 @@ export class RestaurantsComponent implements OnInit {
   searchRestaurant: FormControl
 
   listaRestaurants: Restaurant[]
+  semRestaurante = true
 
   constructor(private restaurantService: RestaurantsService, private fb: FormBuilder) { }
  
@@ -48,11 +49,13 @@ export class RestaurantsComponent implements OnInit {
       switchMap((search) => this.restaurantService.restaurants(search)),
     ).subscribe((data) => {
       this.listaRestaurants = data
+      this.semRestaurante = this.listaRestaurants.length == 0
     }, ErrorHandler.handleError)
 
     this.restaurantService.restaurants('').subscribe(
       (data) => {
         this.listaRestaurants = data
+        this.semRestaurante = this.listaRestaurants.length == 0
       }, ErrorHandler.handleError
     )
   }

@@ -24,10 +24,12 @@
 
 <section class="content">
     <div class="row">
-        <div *ngFor="let res of listaRestaurants" class="col-sm-6 col-xs-12">
+        <div
+         *ngFor="let res of listaRestaurants" 
+         class="col-sm-6 col-xs-12">
             <app-restaurant [restaurantInput]="res"></app-restaurant>
         </div>
-        <div class="cols-xs-12" *ngIf='listaRestaurants.length === 0'>
+        <div class="cols-xs-12" *ngIf='semRestaurante'>
             Não foram encontrado restaurantes
         </div>
     </div>
