@@ -6,13 +6,14 @@ import { Observable} from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { MEAT_API } from '../app.api';
 import { Order } from './order.model';
+import { LoginService } from '../security/login/login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  constructor(private cartService: ShoppingCartService, private http: HttpClient) {}
+  constructor(private cartService: ShoppingCartService, private http: HttpClient, private loginService: LoginService) {}
 
   cartItems(): CartItem[]{
     return this.cartService.carts
@@ -39,14 +40,13 @@ export class OrderService {
   }
 
   checkOrder(order: Order): Observable<string>{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
+    let headers = new HttpHeaders()
+    if (this.loginService.isLoggedIn()){
+      headers = headers.set('Authorization', 'Bearer ' + this.loginService.user.accessToken)
+    }
 
     return this.http.post<string>(
-      MEAT_API + '/orders', JSON.stringify(order), httpOptions)
+      MEAT_API + '/orders', order, {headers: headers})
   }
 
 }

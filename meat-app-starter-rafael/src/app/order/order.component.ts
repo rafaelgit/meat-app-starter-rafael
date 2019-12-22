@@ -7,6 +7,7 @@ import { Order, OrderItem } from './order.model';
 import { ErrorHandler } from '../app.error-handler';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-order',
@@ -22,6 +23,8 @@ export class OrderComponent implements OnInit {
     {label: 'Cartão de Débito', value: 'DEB'},
     {label: 'Cartão Refeição', value: 'REF'}
   ]
+
+  orderId: string
 
   constructor(private orderService: OrderService, private router: Router, private fb: FormBuilder) {}
   
@@ -43,7 +46,7 @@ export class OrderComponent implements OnInit {
     }, {validators: [OrderComponent.validarEmail, OrderComponent.validarEmail]})
   }
 
-static validarEmail(group: AbstractControl): {[key: string]: boolean}{
+  static validarEmail(group: AbstractControl): {[key: string]: boolean}{
     const email = group.get("email")
     const emailConfirmation = group.get("emailConfirmation")
 
@@ -79,16 +82,25 @@ static validarEmail(group: AbstractControl): {[key: string]: boolean}{
     return this.orderService.total()
   }
 
+  isOrderCompleted(): boolean{
+    return this.orderId !== undefined
+  }
+
   checkOrder(order: Order){
     order.orderItem = this.cartItems()
       .map((item: CartItem) => new OrderItem(item.quantity, item.menuItem.id)) 
 
-    this.orderService.checkOrder(order).subscribe(
-      (data) => {
-        this.router.navigate(['summary'])
-        this.orderService.clear()
-      }, ErrorHandler.handleError
-    )
+    this.orderService.checkOrder(order)
+      .pipe(
+        tap(orderId => {
+          this.orderId = orderId
+        })
+      ).subscribe(
+        (data) => {
+          this.router.navigate(['summary'])
+          this.orderService.clear()
+        }, ErrorHandler.handleError
+      )
   }
 
 }

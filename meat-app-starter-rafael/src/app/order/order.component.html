@@ -24,17 +24,17 @@
                   <span class="help-block pull-right has-error-block" *ngIf="userForm.hasError('emailsNotMatch')"><i class="fa fa-remove"></i>E-mails não conferem</span>
                 </div>
                 <div class="col-sm-6 col-xs-8">
-                  <app-input label="nome">
+                  <app-input label="nome" value="Rafael Pereira">
                     <input class="form-control" name="nome" autocomplete="off" formControlName="nome"/>
                   </app-input>
                 </div>
                 <div class="col-sm-3 col-xs-8">
-                  <app-input label="email">
+                  <app-input label="email" value="rafaelrpdev@gmail.com">
                     <input class="form-control" name="email" autocomplete="off" formControlName="email"/>
                   </app-input>
                 </div>
                 <div class="col-sm-3 col-xs-2">
-                  <app-input label="emailConfirmation">
+                  <app-input label="emailConfirmation" value="rafaelrpdev@gmail.com">
                     <input class="form-control" name="emailConfirmation" autocomplete="off" formControlName="emailConfirmation"/>
                   </app-input>
                 </div>
@@ -46,17 +46,17 @@
                     <p class="lead">Endereço de Entrega:</p>
                   </div>
                   <div class="col-sm-6 col-xs-12">
-                  <app-input label="Endereço" errorMessage="Campo obrigatório e com mínimo de 5 caracteres">
+                  <app-input label="Endereço" errorMessage="Campo obrigatório e com mínimo de 5 caracteres" value="Rua Frei Jaboatão">
                     <input class="form-control" name="address" autocomplete="off" formControlName="address"/>
                   </app-input>
                   </div>
                   <div class="col-sm-2 col-xs-6">
-                    <app-input label="Número">
+                    <app-input label="Número" value="43">
                       <input class="form-control" name="number" pattern="^[0-9]*$" formControlName="number"/>
                     </app-input>
                   </div>
                   <div class="col-sm-4 col-xs-6">
-                    <app-input label="Complemento">
+                    <app-input label="Complemento" value="Após o cemitério">
                       <input class="form-control" name="complement" formControlName="complement"/>
                     </app-input>
                   </div>

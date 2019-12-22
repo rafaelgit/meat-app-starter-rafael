@@ -15,7 +15,7 @@ export class RestaurantsService {
 
     restaurants(search?: string): Observable<Restaurant[]> {
       return this.http
-        .get<Restaurant[]>(MEAT_API + '/restaurants', {params: {q: search}})
+        .get<Restaurant[]>(MEAT_API + '/restaurants', {params: {q: search == undefined ? '' : search}})
     }
 
     restaurantById(id: string): Observable<Restaurant>{

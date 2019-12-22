@@ -52,7 +52,7 @@ export class RestaurantsComponent implements OnInit {
       this.semRestaurante = this.listaRestaurants.length == 0
     }, ErrorHandler.handleError)
 
-    this.restaurantService.restaurants('').subscribe(
+    this.restaurantService.restaurants().subscribe(
       (data) => {
         this.listaRestaurants = data
         this.semRestaurante = this.listaRestaurants.length == 0

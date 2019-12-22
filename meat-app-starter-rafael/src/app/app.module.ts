@@ -22,6 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SnackbarComponent } from './messages/snackbar/snackbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './security/login/login.component';
+import { UserDetailComponent } from './header/user-detail/user-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OrderLeaveModalComponent } from './order/order-leave-modal/order-leave-modal.component';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -40,16 +43,20 @@ registerLocaleData(localePt);
     OrderSummaryComponent,
     SnackbarComponent,
     NotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    UserDetailComponent,
+    OrderLeaveModalComponent
   ],
   imports: [
     BrowserModule,
+    NgbModule,
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules}),
     SharedModule.forRoot()
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt-Br'}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [OrderLeaveModalComponent]
 })
 export class AppModule { }

@@ -12,16 +12,17 @@ import { LoggedInGuard } from './restaurants/loggedin.guard'
 export const ROUTES: Routes = [
     {path: '', component: HomeComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule)},
-    {path: 'restaurants', component: RestaurantsComponent, canLoad: [LoggedInGuard]},
+    {path: 'login/:to', component: LoginComponent},
     {path: 'restaurants/:id', component: RestaurantDetailComponent,
         children:[
             {path: '', redirectTo: 'menu', pathMatch: 'full'},
             {path: 'menu', component: MenuComponent},
             {path: 'reviews', component: ReviewsComponent}
         ]},
+    {path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule), canLoad: [LoggedInGuard]},
     {path: 'order', loadChildren: () => import('./order/order.module').then(m => m.OrderModule),
-        canLoad: [LoggedInGuard]},
+        canLoad: [LoggedInGuard], canActivate: [LoggedInGuard]},
+    {path: 'restaurants', component: RestaurantsComponent},
     {path: 'summary', component: OrderSummaryComponent},
     {path: '**', component: NotFoundComponent}
 ]
