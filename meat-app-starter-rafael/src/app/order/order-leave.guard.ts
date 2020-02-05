@@ -1,31 +1,41 @@
-import { CanDeactivate, ActivatedRoute, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { OrderComponent } from './order.component';
+import { CanDeactivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OrderComponent } from './order.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { OrderLeaveModalComponent } from './order-leave-modal/order-leave-modal.component';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LeaveOrderGuard implements CanDeactivate<OrderComponent>{
  
-    constructor (private modal: NgbModal){}
+    constructor (private modalService: BsModalService){}
 
     canDeactivate(orderComponent: OrderComponent,
         activatedRoute: ActivatedRouteSnapshot,
         routerState: RouterStateSnapshot): boolean{
         if (!orderComponent.isOrderCompleted()){
-            return window.confirm('Deseja desistir da compra?')
-            // this.modal.open(OrderLeaveModalComponent).result.then(
-            //     confirmar => {
-            //         return true
-            //     },
-            //     fechar => {
-            //         return false
-            //     }
-            // )
-            return false
+            // const subject = new Subject<boolean>()
+            // const modal = this.modalService.show(OrderLeaveModalComponent, {'class': 'modal-dialog-primary'})
+            // modal.content.subject = subject
+            // return subject.asObservable()
+            // orderComponent.showModal(function(){
+            //     console.log("teste")
+            //     return false;
+            // })
+            // return window.confirm('Deseja desistir da compra?')
+            this.modalService.show(OrderLeaveModalComponent);
+
+            // (<OrderLeaveModalComponent>modal.content).onClose.subscribe(result => {
+            //     return true
+            // })
+
+            // subscribe(response=>){
+            // }
+            // return false
         }else{
-            return false
+            // return false
+            return null
         }
     }
 }

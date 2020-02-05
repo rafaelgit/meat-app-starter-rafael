@@ -24,7 +24,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './security/login/login.component';
 import { UserDetailComponent } from './header/user-detail/user-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { OrderLeaveModalComponent } from './order/order-leave-modal/order-leave-modal.component';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -44,8 +43,7 @@ registerLocaleData(localePt);
     SnackbarComponent,
     NotFoundComponent,
     LoginComponent,
-    UserDetailComponent,
-    OrderLeaveModalComponent
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +54,6 @@ registerLocaleData(localePt);
     SharedModule.forRoot()
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt-Br'}],
-  bootstrap: [AppComponent],
-  entryComponents: [OrderLeaveModalComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

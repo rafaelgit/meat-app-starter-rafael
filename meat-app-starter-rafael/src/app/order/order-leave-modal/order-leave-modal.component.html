@@ -1,16 +1,30 @@
-<div class="modal-header">
-    <h4 class="modal-title" id="modal-title">Profile deletion</h4>
-    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-    </button>
+<div class="modal fade in" tabindex="-1" role="dialog" [style.display]="showModal ? 'block' : 'none'">
+  <div class="modal-dialog" role="document" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="hide()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{title}}</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="cancelAction()">Não</button>
+        <button type="button" class="btn btn-primary" (click)="positiveAction()">Sim</button>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="modal-body">
-    <p><strong>Are you sure you want to delete <span class="text-primary">"John Doe"</span> profile?</strong></p>
-    <p>All information associated to this user profile will be permanently deleted.
-        <span class="text-danger">This operation can not be undone.</span>
-    </p>
+
+<!--
+<div class="modal fade" [style.display]="showModal ? 'block' : 'none'"></div>
+  <div class="modal" tabindex="-1" role="dialog" style="display: block" [style.display]="showModal ? 'block' : 'none'">
+     <div class="modal-dialog">
+        <div class="modal-popup">
+          <div class="popup-title">
+            <span>{{title}} </span>
+            <i class="icon-cancel fr" data-dismiss="modal" aria-label="Close" (click)="cancelAction()"></i>
+            <p *ngIf="subTitle">{{subTitle}}</p>
+          </div>
+        <ng-content></ng-content>
+      </div>
+  </div>
 </div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-    <button type="button" ngbAutofocus class="btn btn-danger" (click)="modal.close('confirmar')">Ok</button>
-</div>
+-->

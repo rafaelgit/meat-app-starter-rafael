@@ -4,13 +4,17 @@ import { OrderItemsComponent } from './order-items/order-items.component';
 import { SharedModule } from '../shared/shared.module';
 import { Routes, RouterModule } from '@angular/router';
 import { LeaveOrderGuard } from './order-leave.guard';
+import { OrderLeaveModalComponent } from './order-leave-modal/order-leave-modal.component';
+import { BsModalService, BsModalRef, ModalModule} from 'ngx-bootstrap/modal';
 
 const ROUTES: Routes = [
   {path: '', component: OrderComponent, canDeactivate: [LeaveOrderGuard]}
 ]
 
 @NgModule({
-  declarations: [OrderComponent, OrderItemsComponent],
-  imports: [SharedModule, RouterModule.forChild(ROUTES)]
+  declarations: [OrderComponent, OrderItemsComponent, OrderLeaveModalComponent],
+  entryComponents: [OrderLeaveModalComponent],
+  imports: [SharedModule, RouterModule.forChild(ROUTES), ModalModule.forRoot()],
+  providers: [BsModalService, BsModalRef]
 })
 export class OrderModule { }

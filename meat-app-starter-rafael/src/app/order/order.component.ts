@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Injectable } from '@angular/core';
+import { Component, OnInit, Input, Injectable, Output, EventEmitter } from '@angular/core';
 import { RadioOption } from '../shared/radio/radio-option.model';
 import { CartItem } from '../restaurant-detail/shopping-cart/cart-item.model';
 import { OrderService } from './order.service';
@@ -8,13 +8,19 @@ import { ErrorHandler } from '../app.error-handler';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
+import { ModalAction } from './order-leave-modal/order-leave-modal.component';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html'
 })
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class OrderComponent implements OnInit {
+
+  isExibeModal: boolean = false
+  tituloModal: string = "Deseja desistir da compra?"
 
   userForm: FormGroup
 
@@ -27,10 +33,6 @@ export class OrderComponent implements OnInit {
   orderId: string
 
   constructor(private orderService: OrderService, private router: Router, private fb: FormBuilder) {}
-  
-  testaValidacao(): boolean {
-    return false
-  }
 
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -101,6 +103,23 @@ export class OrderComponent implements OnInit {
           this.orderService.clear()
         }, ErrorHandler.handleError
       )
+  }
+
+  showModal(){
+    this.isExibeModal = true
+  }
+
+  hideModal(){
+    this.isExibeModal = false
+  }
+
+  fechar(event: ModalAction){
+    let parseEvent = ModalAction[event]
+    // if (parseEvent === ModalAction.POSITIVE){
+    //   window.alert('Positivo')
+    // }else if (event === ModalAction.CANCEL){
+    //   window.alert('Cancelado')
+    // }
   }
 
 }

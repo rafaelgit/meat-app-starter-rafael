@@ -126,7 +126,12 @@
                 </button>
               </div>
             </div>
-
+            <app-order-leave-modal
+              [showModal]="isExibeModal"
+              [title]="tituloModal"
+              (hideModal)="hideModal()"
+              (closeEmitter)="fechar($event)">
+            </app-order-leave-modal>
         </section>
     </section>
     <!-- FIM DO CONTEUDO-->
